@@ -3,11 +3,19 @@
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 
+import SearchBar from "../SearchBar/SearchBar"
+import { Select, Option } from "../Select/Select"
+
 function Navbar() {
   const [currencyParam, setCurrencyParam] = useState<string | undefined>()
   
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  /**
+    @name useEffect
+    @description Sets the currency parameter
+  **/
 
   useEffect(() => {
     const currency = searchParams.get("currency")
@@ -16,15 +24,22 @@ function Navbar() {
     }
   }, [searchParams])
 
-  const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newCurrency = e.target.value
+  /**
+    @name handleCurrencyChange
+    @param {React.ChangeEvent<HTMLSelectElement>} event
+    @description Handles the currency change
+  **/
+
+  const handleCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newCurrency = event.target.value
     setCurrencyParam(newCurrency)
+
     router.push(`/?currency=${newCurrency}`)
   }
 
   return (
     <nav
-      className="flex items-center justify-between flex-wrap bg-gray-50 p-6 border-b border-gray-100"
+      className="flex items-center justify-between flex-wrap bg-gray-50 p-3 border-b border-gray-100"
     >
       <ul className="flex space-x-4">
         <li>
@@ -32,23 +47,16 @@ function Navbar() {
         </li>
       </ul>
 
-      <input 
-        type="text" 
-        placeholder="Search" 
-        aria-label="Search" 
-        className="border border-gray-200 p-2 rounded-md"
-      />
+     <SearchBar />
       
-      <select
-        className="border border-gray-200 p-2 rounded-md"
-        name="currency"
+     <Select
         value={currencyParam || "usd"}
-        onChange={handleCurrencyChange}
+        onChangeAction={handleCurrencyChange}
       >
-        <option value="usd">USD</option>
-        <option value="eur">EUR</option>
-        <option value="gbp">GBP</option>
-      </select>
+        <Option value="usd">USD</Option>
+        <Option value="eur">EUR</Option>
+        <Option value="gbp">GBP</Option>
+     </Select>
     </nav>
   )
 }
