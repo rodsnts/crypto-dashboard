@@ -29,7 +29,6 @@ export async function getCryptoList(currency: Currency = "usd") {
 
     return cryptoCurrencies
   } catch (error) {
-    console.error(error)
 
     return error
   }
