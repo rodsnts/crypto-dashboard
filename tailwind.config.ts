@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import catppuccin from "@catppuccin/tailwindcss";
 
 const config: Config = {
   content: [
@@ -14,6 +15,11 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    catppuccin({
+      prefix: "ctp",
+      defaultFlavour: "latte",
+    }),
+  ],
 };
 export default config;

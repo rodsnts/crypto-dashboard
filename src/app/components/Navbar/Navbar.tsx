@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import Link from "next/link"
 
 import SearchBar from "../SearchBar/SearchBar"
 import { Select, Option } from "../Select/Select"
 
 function Navbar() {
   const [currencyParam, setCurrencyParam] = useState<string | undefined>()
-  
+
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -30,7 +31,9 @@ function Navbar() {
     @description Handles the currency change
   **/
 
-  const handleCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCurrencyChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const newCurrency = event.target.value
     setCurrencyParam(newCurrency)
 
@@ -38,25 +41,23 @@ function Navbar() {
   }
 
   return (
-    <nav
-      className="flex items-center justify-between flex-wrap bg-gray-50 p-3 border-b border-gray-100"
-    >
+    <nav className="flex items-center justify-between flex-wrap p-3 border-b border-ctp-lavender">
       <ul className="flex space-x-4">
         <li>
-          <a href="/" className="text-gray-700 hover:text-gray-900">Home</a>
+          <Link href="/">Home</Link>
         </li>
       </ul>
 
-     <SearchBar />
-      
-     <Select
+      <SearchBar />
+
+      <Select
         value={currencyParam || "usd"}
         onChangeAction={handleCurrencyChange}
       >
         <Option value="usd">USD</Option>
         <Option value="eur">EUR</Option>
         <Option value="gbp">GBP</Option>
-     </Select>
+      </Select>
     </nav>
   )
 }

@@ -2,10 +2,10 @@ import { API_KEY, API_URL } from "@/app/utils/globals"
 import { Currency } from "@/app/types"
 
 const options = {
-  method: 'GET',
+  method: "GET",
   headers: {
-    'Content-Type': 'application/json',
-    'X-CG_PRO_API_KEY': API_KEY
+    "Content-Type": "application/json",
+    "X-CG_PRO_API_KEY": API_KEY
   }
 }
 
@@ -19,17 +19,24 @@ const detailParams =
 **/
 
 export async function getCryptoList(currency: Currency = "usd") {
-  const coins: string[] = ["bitcoin", "ethereum", "dogecoin", "cardano", "solana"]
+  const coins: string[] = [
+    "bitcoin",
+    "ethereum",
+    "dogecoin",
+    "cardano",
+    "solana"
+  ]
 
   try {
-    let data = 
-      await fetch(`${API_URL}price?ids=${coins}&vs_currencies=${currency}&${detailParams}`, options)
+    const data = await fetch(
+      `${API_URL}simple/price?ids=${coins}&vs_currencies=${currency}&${detailParams}`,
+      options
+    )
 
-    let cryptoCurrencies = await data.json()
+    const cryptoCurrencies = await data.json()
 
     return cryptoCurrencies
   } catch (error) {
-
     return error
   }
 }
@@ -43,8 +50,31 @@ export async function getCryptoList(currency: Currency = "usd") {
 
 export async function getCoinDetails(coin: string, currency: Currency = "usd") {
   try {
-    const data =
-      await fetch(`${API_URL}price?ids=${coin}&vs_currencies=${currency}&${detailParams}`, options)
+    const data = await fetch(
+      `${API_URL}simple/price?ids=${coin}&vs_currencies=${currency}&${detailParams}`,
+      options
+    )
+
+    const cryptoCurrency = await data.json()
+
+    return cryptoCurrency
+  } catch (error) {
+    console.error(error)
+
+    return error
+  }
+}
+// /bitcoin/market_chart?vs_currency=usd&days=7&interval=daily
+export async function getCoinHistory(
+  coin: string,
+  currency: Currency = "usd",
+  days: number = 7
+) {
+  try {
+    const data = await fetch(
+      `${API_URL}${coin}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`,
+      options
+    )
 
     const cryptoCurrency = await data.json()
 
