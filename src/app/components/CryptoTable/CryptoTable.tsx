@@ -22,6 +22,15 @@ interface CryptoTableProps {
   cryptoData: CryptoData | undefined
 }
 
+const columns = [
+  "No",
+  "Name",
+  "Price",
+  "Historical Data",
+  "Market cap",
+  "24h Change"
+]
+//px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
 function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
   return (
     <div className="container mx-auto p-4">
@@ -30,31 +39,25 @@ function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
           <table className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  No
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Price
-                </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Market cap ({currency?.toUpperCase()})
-                </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  24h Change
-                </th>
+                {columns.map((column) => (
+                  <th
+                    key={column}
+                    className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    {column}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {Object.keys(cryptoData).map((crypto) => (
-                <tr key={crypto} className="hover:bg-gray-50">
+                <tr key={crypto} className="hover:bg-gray-50 text-center">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">
                       {Object.keys(cryptoData).indexOf(crypto) + 1}
                     </div>
                   </td>
+
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">
                       {crypto?.toUpperCase()}
@@ -70,16 +73,24 @@ function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
                       {cryptoData[crypto][currency as Currency]}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right">
-                    <div className="text-sm text-gray-900">
+
+                  <td className="px-6 py-4 whitespace-nowrap text-center">
+                    <div className="text-sm text-gray-900 text-center">
+                      test
+                    </div>
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap text-center">
+                    <div className="text-sm text-gray-900 ">
                       {convertNumber(
                         cryptoData[crypto][`${currency}_market_cap`]
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right">
+
+                  <td className="px-6 py-4 whitespace-nowrap text-center">
                     <div
-                      className={`text-sm flex items-center justify-end ${
+                      className={`text-sm flex justify-center items-center ${
                         cryptoData[crypto][`${currency}_24h_change`] >= 0
                           ? "text-green-600"
                           : "text-red-600"
