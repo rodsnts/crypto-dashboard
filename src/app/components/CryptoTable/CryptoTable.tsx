@@ -1,6 +1,7 @@
 "use client"
 
 import { Currency } from "@/app/types"
+import { convertNumber } from "@/app/utils/utils"
 
 enum CurrencySymbols {
   USD = "$",
@@ -49,7 +50,7 @@ function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
                   <div className="text-sm text-gray-900">
-                    {cryptoData[crypto][`${currency}_market_cap`]?.toFixed(2)}
+                    {convertNumber(cryptoData[crypto][`${currency}_market_cap`])}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
