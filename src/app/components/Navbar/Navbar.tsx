@@ -44,7 +44,9 @@ function Navbar() {
     <nav className="flex items-center justify-between flex-wrap p-3 border-b border-ctp-lavender">
       <ul className="flex space-x-4">
         <li>
-          <Link href="/">Home</Link>
+          <Link className="font-bold" href="/">
+            CryptoDashboard
+          </Link>
         </li>
       </ul>
 

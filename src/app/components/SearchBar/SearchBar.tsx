@@ -1,15 +1,41 @@
 "use client"
+
 import { useState } from "react"
 
+import { useCoinSearch } from "@/app/hooks/useCoinSearch"
+
 function SearchBar() {
+  const [query, setQuery] = useState<string>("")
+
+  const { data: suggestions, error, isLoading } = useCoinSearch(query)
 
   return (
-    <div className="flex items-center justify-between bg-gray-50 border-b border-gray-100">
-      <input 
-        type="text" 
-        placeholder="Search"
-        className="border border-gray-200 p-2 rounded-md focus:outline-none"
+    <div className="max-w-md mx-auto relative">
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Search for a coin..."
       />
+
+      {isLoading && <p className="mt-2 text-gray-500">Loading...</p>}
+      {error && <p className="mt-2 text-red-500">{error}</p>}
+
+      {suggestions && suggestions.length > 0 && (
+        <ul className="absolute z-10 w-full mt-2 border border-gray-300 rounded-md bg-white shadow-lg">
+          {suggestions.map((coin) => (
+            <li
+              key={coin.id}
+              className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
+            >
+              <span>
+                {coin.name} ({coin.symbol.toUpperCase()})
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

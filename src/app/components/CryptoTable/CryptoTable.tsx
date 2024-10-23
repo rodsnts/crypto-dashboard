@@ -1,7 +1,8 @@
-"use client"
-
 import { Currency } from "@/app/types"
 import { convertNumber } from "@/app/utils/utils"
+
+import LineGraph from "../LineGraph/LineGraph"
+import { getCoinHistory } from "@/app/utils/data"
 
 enum CurrencySymbols {
   USD = "$",
@@ -30,8 +31,8 @@ const columns = [
   "Market cap",
   "24h Change"
 ]
-//px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
-function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
+
+async function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
   return (
     <div className="container mx-auto p-4">
       {cryptoData ? (
@@ -50,61 +51,70 @@ function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {Object.keys(cryptoData).map((crypto) => (
-                <tr key={crypto} className="hover:bg-gray-50 text-center">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
-                      {Object.keys(cryptoData).indexOf(crypto) + 1}
-                    </div>
-                  </td>
+              {Object.keys(cryptoData).map(async (crypto) => {
+                const mockData = await getCoinHistory(
+                  crypto,
+                  currency as Currency
+                )
 
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                      {crypto?.toUpperCase()}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">
-                      {`${
-                        CurrencySymbols[
-                          currency?.toUpperCase() as keyof typeof CurrencySymbols
-                        ]
-                      }`}{" "}
-                      {cryptoData[crypto][currency as Currency]}
-                    </div>
-                  </td>
+                return (
+                  <tr key={crypto} className="hover:bg-gray-50 text-center">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {Object.keys(cryptoData).indexOf(crypto) + 1}
+                      </div>
+                    </td>
 
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <div className="text-sm text-gray-900 text-center">
-                      test
-                    </div>
-                  </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900">
+                        {crypto?.toUpperCase()}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-500">
+                        {`${
+                          CurrencySymbols[
+                            currency?.toUpperCase() as keyof typeof CurrencySymbols
+                          ]
+                        }`}{" "}
+                        {cryptoData[crypto][currency as Currency]}
+                      </div>
+                    </td>
 
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <div className="text-sm text-gray-900 ">
-                      {convertNumber(
-                        cryptoData[crypto][`${currency}_market_cap`]
-                      )}
-                    </div>
-                  </td>
+                    <td className="px-6 py-4 whitespace-nowrap flex">
+                      <LineGraph width="100%" height="50%" data={mockData} />
+                    </td>
 
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <div
-                      className={`text-sm flex justify-center items-center ${
-                        cryptoData[crypto][`${currency}_24h_change`] >= 0
-                          ? "text-green-600"
-                          : "text-red-600"
-                      }`}
-                    >
-                      {cryptoData[crypto][`${currency}_24h_change`] >= 0
-                        ? "▲"
-                        : "▼"}
-                      {cryptoData[crypto][`${currency}_24h_change`]?.toFixed(3)}
-                      %
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <div className="text-sm text-gray-900 ">
+                        {convertNumber(
+                          cryptoData[crypto][`${currency}_market_cap`]
+                        )}
+                      </div>
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <div
+                        className={`text-sm flex justify-center items-center ${
+                          cryptoData[crypto][`${currency}_24h_change`] >= 0
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        <div className="mr-2">
+                          {cryptoData[crypto][`${currency}_24h_change`] >= 0
+                            ? "▲"
+                            : "▼"}
+                        </div>
+                        {cryptoData[crypto][`${currency}_24h_change`]?.toFixed(
+                          3
+                        )}
+                        %
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>

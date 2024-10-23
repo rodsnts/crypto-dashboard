@@ -64,7 +64,15 @@ export async function getCoinDetails(coin: string, currency: Currency = "usd") {
     return error
   }
 }
-// /bitcoin/market_chart?vs_currency=usd&days=7&interval=daily
+
+/**
+  @name getCoinHistory
+  @param {string} coin
+  @param {Currency} currency
+  @param {number} days
+  @description Fetches the historical data of a specific cryptocurrency
+**/
+
 export async function getCoinHistory(
   coin: string,
   currency: Currency = "usd",
@@ -72,7 +80,7 @@ export async function getCoinHistory(
 ) {
   try {
     const data = await fetch(
-      `${API_URL}${coin}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`,
+      `${API_URL}/coins/${coin}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`,
       options
     )
 
