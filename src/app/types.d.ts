@@ -14,7 +14,7 @@ export type CoinDetails = {
   symbol: string
   description: { en: string }
   market_data: MarketData
-  error?: string
+  status: { error_code?: string; error_message?: string }
 }
 
 export type PriceData = {

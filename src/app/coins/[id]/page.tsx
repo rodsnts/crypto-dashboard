@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation"
 import { getCoinDetails, getCoinHistory } from "@/app/utils/data"
 import { CoinDetails, PriceData } from "@/app/types"
 
@@ -19,9 +18,22 @@ export default async function Page({ params }: PageProps) {
   const priceData: PriceData = await getCoinHistory(id.toLowerCase(), "usd")
   const coinDetails: CoinDetails = await getCoinDetails(id.toLowerCase())
 
-  if (!coinDetails || coinDetails.error) {
-    redirect("/404")
-    return null
+  if (!coinDetails) {
+    return (
+      <div className="container mx-auto px-4 py-8 space-y-8">
+        <h1 className="text-3xl font-bold text-center">
+          Something went wrong while fetching the data...
+        </h1>
+      </div>
+    )
+  }
+
+  if (coinDetails?.status?.error_message) {
+    return (
+      <div className="container mx-auto px-4 py-8 space-y-8">
+        <h1 className="text-3xl font-bold text-center">Coin not found</h1>
+      </div>
+    )
   }
 
   return (

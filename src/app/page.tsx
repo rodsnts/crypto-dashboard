@@ -1,7 +1,10 @@
+import { Suspense } from "react"
 import { Currency, SearchParamsTypes } from "@/app/types"
-
 import { getCryptoList } from "@/app/utils/data"
-import CryptoTable from "./components/CryptoTable/CryptoTable"
+
+import CryptoTable from "@/app/components/CryptoTable/CryptoTable"
+import Spinner from "@/app/components/Spinner/Spinner"
+
 export default async function Home({
   searchParams
 }: {
@@ -11,13 +14,11 @@ export default async function Home({
 
   const cryptoData = await getCryptoList(currency)
 
-  if (cryptoData?.status?.error_code) {
-    return <h1>{cryptoData.status.error_message}</h1>
-  }
-
   return (
     <div className="max-h-full h-full flex flex-col items-center justify-center py-2">
-      <CryptoTable cryptoData={cryptoData} currency={currency || "usd"} />
+      <Suspense fallback={<Spinner fullscreen />}>
+        <CryptoTable cryptoData={cryptoData} currency={currency || "usd"} />
+      </Suspense>
     </div>
   )
 }

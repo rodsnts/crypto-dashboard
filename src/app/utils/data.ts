@@ -57,8 +57,6 @@ export async function getCoinDetails(coin: string) {
 
     const cryptoCurrency = await data.json()
 
-    console.log(cryptoCurrency)
-
     return cryptoCurrency
   } catch (error) {
     console.error(error)

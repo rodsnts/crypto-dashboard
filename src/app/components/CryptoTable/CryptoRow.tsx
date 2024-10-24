@@ -1,11 +1,24 @@
 "use client"
 
+import dynamic from "next/dynamic"
+
 import { CryptoData, Currency } from "@/app/types"
 import { convertNumber } from "@/app/utils/utils"
 import { FiExternalLink } from "react-icons/fi"
 
-import LineGraph from "@/app/components/LineGraph/LineGraph"
 import Link from "next/link"
+
+const LineGraph = dynamic(
+  () => import("@/app/components/LineGraph/LineGraph"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-[200px] h-[40px] bg-gray-200 animate-pulse flex items-center justify-center">
+        <p>Loading chart...</p>
+      </div>
+    )
+  }
+)
 
 interface CryptoRowProps {
   crypto: string

@@ -1,5 +1,19 @@
+"use client"
+
+import dynamic from "next/dynamic"
 import { PriceData } from "@/app/types"
-import PriceChart from "@/app/components/PriceChart/PriceChart"
+
+const PriceChart = dynamic(
+  () => import("@/app/components/PriceChart/PriceChart"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[400px] bg-gray-200 animate-pulse flex items-center justify-center">
+        <p>Loading chart...</p>
+      </div>
+    )
+  }
+)
 
 interface PriceChartSectionProps {
   priceData: PriceData
