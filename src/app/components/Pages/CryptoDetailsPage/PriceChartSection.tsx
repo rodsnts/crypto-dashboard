@@ -28,7 +28,7 @@ function PriceChartSection({ priceData, hasProfit }: PriceChartSectionProps) {
         <h2 className="text-xl sm:text-2xl text-ctp-text font-bold">
           Price Chart
         </h2>
-        <p className="text-ctp-subtext0">Bitcoin price over time (1W) </p>
+        <p className="text-ctp-subtext0">Price over time (1W) </p>
       </div>
       <div className="relative h-[300px] sm:h-[400px]">
         <PriceChart priceData={priceData} hasProfit={hasProfit} />
