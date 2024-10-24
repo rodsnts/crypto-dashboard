@@ -30,7 +30,7 @@ export default async function Page({ params }: PageProps) {
     )
   }
 
-  if (coinDetails?.status?.error_message) {
+  if (coinDetails?.status?.error_message || coinDetails?.error) {
     return (
       <div className="container mx-auto px-4 py-8 space-y-8">
         <h1 className="text-3xl font-bold text-center">Coin not found</h1>
