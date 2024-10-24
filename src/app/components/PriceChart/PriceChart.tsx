@@ -37,7 +37,7 @@ function PriceChart({ priceData, hasProfit }: PriceChartProps) {
             <stop
               offset="5%"
               stopColor={hasProfit ? "#40a02b" : "#d20f39"}
-              stopOpacity={0.5}
+              stopOpacity={0.3}
             />
             <stop offset="95%" stopColor="#fff" stopOpacity={0} />
           </linearGradient>
@@ -74,7 +74,7 @@ function PriceChart({ priceData, hasProfit }: PriceChartProps) {
               return (
                 <div className="bg-white p-4 shadow-md rounded-md">
                   <p className="text-sm">{formattedDate}</p>
-                  <p className="text-sm">Price: ${price?.toLocaleString()}</p>
+                  <p className="text-sm">Price: ${Number(price)?.toFixed(2)}</p>
                 </div>
               )
             }
