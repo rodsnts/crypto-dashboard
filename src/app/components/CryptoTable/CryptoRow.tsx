@@ -1,3 +1,5 @@
+"use client"
+
 import { CryptoData, Currency } from "@/app/types"
 import { convertNumber } from "@/app/utils/utils"
 import { FiExternalLink } from "react-icons/fi"
@@ -54,7 +56,7 @@ function CryptoRow({
 
       <td className="relative w-1 px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-900">
-          <LineGraph width="100%" height="100%" data={historyData} />
+          <LineGraph data={historyData} />
         </div>
       </td>
 

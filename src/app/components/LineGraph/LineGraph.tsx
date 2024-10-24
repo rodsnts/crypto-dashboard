@@ -11,8 +11,6 @@ interface Props {
         error?: string
       }
     | undefined
-  width: string | number
-  height: string | number
 }
 
 function LineGraph({ data }: Props) {
