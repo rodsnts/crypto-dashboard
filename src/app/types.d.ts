@@ -24,3 +24,11 @@ export type PriceData = {
 export interface SearchParamsTypes {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
+
+export interface CryptoData {
+  [key: string]: {
+    [key in Currency]: number
+  } & {
+    [key: string]: number
+  }
+}
