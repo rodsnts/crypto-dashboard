@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-
 import { XAxis, YAxis, Tooltip, LineChart, Line, CartesianGrid } from "recharts"
 
 interface Props {

@@ -1,7 +1,8 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import { PriceData } from "@/app/types"
+
+import dynamic from "next/dynamic"
 
 const PriceChart = dynamic(
   () => import("@/app/components/PriceChart/PriceChart"),

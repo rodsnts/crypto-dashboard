@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-
 import { useCoinSearch } from "@/app/hooks/useCoinSearch"
+
+import Link from "next/link"
 import Spinner from "@/app/components/Spinner/Spinner"
 
 function SearchBar() {

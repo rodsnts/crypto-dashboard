@@ -3,11 +3,10 @@
 import { Suspense, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Menu, X } from "lucide-react"
+import { Select, Option } from "../Select/Select"
 
 import Link from "next/link"
-
 import SearchBar from "../SearchBar/SearchBar"
-import { Select, Option } from "../Select/Select"
 
 export default function Navbar() {
   const [currencyParam, setCurrencyParam] = useState<string | undefined>()

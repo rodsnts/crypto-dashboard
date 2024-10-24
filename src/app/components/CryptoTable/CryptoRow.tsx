@@ -1,10 +1,10 @@
 "use client"
 
-import dynamic from "next/dynamic"
-
 import { CryptoData, Currency } from "@/app/types"
 import { convertNumber } from "@/app/utils/utils"
 import { FiExternalLink } from "react-icons/fi"
+
+import dynamic from "next/dynamic"
 
 import Link from "next/link"
 
