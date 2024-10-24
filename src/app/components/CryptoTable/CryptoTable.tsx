@@ -17,10 +17,7 @@ const columns = [
   "24h Change"
 ]
 
-export default function CryptoTable({
-  currency,
-  cryptoData
-}: CryptoTableProps) {
+function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
   if (!cryptoData) {
     return <div>Loading...</div>
   }
@@ -69,3 +66,5 @@ export default function CryptoTable({
     </div>
   )
 }
+
+export default CryptoTable

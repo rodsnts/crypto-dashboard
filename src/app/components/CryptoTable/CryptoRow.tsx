@@ -1,7 +1,11 @@
+"use client"
+
 import { CryptoData, Currency } from "@/app/types"
 import { convertNumber } from "@/app/utils/utils"
+import { FiExternalLink } from "react-icons/fi"
 
 import LineGraph from "@/app/components/LineGraph/LineGraph"
+import Link from "next/link"
 
 interface CryptoRowProps {
   crypto: string
@@ -17,7 +21,7 @@ enum CurrencySymbols {
   GBP = "£"
 }
 
-async function CryptoRow({
+function CryptoRow({
   crypto,
   index,
   currency,
@@ -25,15 +29,18 @@ async function CryptoRow({
   historyData
 }: CryptoRowProps) {
   return (
-    <tr key={crypto} className="hover:bg-gray-50 text-center">
+    <tr key={crypto} className="hover:bg-gray-50 text-center mouse-pointer">
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-900">{index + 1}</div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">
-          {crypto?.toUpperCase()}
-        </div>
+        <Link href={`/coins/${crypto.toLowerCase()}`}>
+          <div className="text-sm font-medium text-gray-900 hover:text-blue-500 cursor-pointer transition-colors duration-200 ease-in-out">
+            {crypto?.toUpperCase()}
+            <FiExternalLink className="inline-block ml-2" />
+          </div>
+        </Link>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
