@@ -1,10 +1,11 @@
 import { redirect } from "next/navigation"
 import { getCoinDetails, getCoinHistory } from "@/app/utils/data"
 import { CoinDetails, PriceData } from "@/app/types"
-import AboutCoin from "@/app/components/Pages/IndexPage/AboutCoin"
-import KeyStatistics from "@/app/components/Pages/IndexPage/KeyStatistics"
-import PriceChartSection from "@/app/components/Pages/IndexPage/PriceChartSection"
-import CoinHeader from "@/app/components/Pages/IndexPage/CoinHeader"
+
+import AboutCoin from "@/app/components/Pages/CryptoDetailsPage/AboutCoin"
+import KeyStatistics from "@/app/components/Pages/CryptoDetailsPage/KeyStatistics"
+import PriceChartSection from "@/app/components/Pages/CryptoDetailsPage/PriceChartSection"
+import CoinHeader from "@/app/components/Pages/CryptoDetailsPage/CoinHeader"
 
 interface PageProps {
   params: { id: string }

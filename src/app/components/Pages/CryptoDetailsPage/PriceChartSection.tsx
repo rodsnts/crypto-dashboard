@@ -1,5 +1,5 @@
 import { PriceData } from "@/app/types"
-import PriceChart from "../../PriceChart/PriceChart"
+import PriceChart from "@/app/components/PriceChart/PriceChart"
 
 interface PriceChartSectionProps {
   priceData: PriceData
