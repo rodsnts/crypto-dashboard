@@ -16,7 +16,7 @@ function Spinner({ size = "md", fullscreen = false }: SpinnerProps) {
   return (
     <div className={`${containerClasses} flex items-center justify-center`}>
       <div
-        className={`${sizeClasses[size]} border-ctp-sapphire border-t-transparent rounded-full animate-spin`}
+        className={`${sizeClasses[size]} border-ctp-lavender border-t-transparent rounded-full animate-spin`}
         role="status"
       >
         <span className="sr-only">Loading...</span>

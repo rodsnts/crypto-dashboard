@@ -18,7 +18,7 @@ const columns = [
 ]
 
 function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
-  if (!cryptoData) {
+  if (!cryptoData || cryptoData?.status?.error_message) {
     return (
       <div className="container mx-auto px-4 py-8 space-y-8">
         <h1 className="text-3xl font-bold text-center">
@@ -30,24 +30,24 @@ function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
 
   return (
     <div className="container mx-auto p-4">
+      <h2 className=" text-2xl font-semibold py-4 text-ctp-text">
+        Trending Cryptocurrencies
+      </h2>
       <div className="overflow-x-auto">
-        <h2 className=" text-2xl font-semibold text-gray-800 py-4">
-          Trending Cryptocurrencies
-        </h2>
-        <table className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
-          <thead className="bg-gray-50">
+        <table className="w-full bg-ctp-crust border-2 border-ctp-lavender rounded-lg overflow-hidden">
+          <thead className="bg-ctp-mantle">
             <tr>
               {columns.map((column) => (
                 <th
                   key={column}
-                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-center text-xs font-medium text-ctp-text uppercase tracking-wider"
                 >
                   {column}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-ctp-base text-ctp-text">
             {Object.keys(cryptoData).map(async (crypto, index) => {
               const historyData = await getCoinHistory(
                 crypto,

@@ -17,12 +17,12 @@ function SearchBar() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="p-2 border border-gray-300 rounded-md focus:outline-none"
+        className="p-2 border border-ctp-lavender bg-ctp-base rounded-md focus:outline-none"
         placeholder="Search for a coin..."
       />
 
       {query && (
-        <ul className="absolute z-10 w-full mt-2 border border-gray-300 rounded-md bg-white shadow-lg max-h-60 overflow-y-auto">
+        <ul className="absolute z-10 w-full mt-2 border bg-ctp-crust text-ctp-text rounded-md border-ctp-lavender shadow-lg max-h-60 overflow-y-auto">
           {isLoading && <Spinner />}
           {error && <li className="p-2 text-red-500">{error}</li>}
 
@@ -33,7 +33,7 @@ function SearchBar() {
                   onClick={() => setQuery("")}
                   href={`/coins/${coin?.name}`}
                 >
-                  <li className="p-2 hover:bg-gray-100 cursor-pointer flex items-center">
+                  <li className="p-2 hover:bg-ctp-mantle 0 cursor-pointer flex items-center">
                     {coin?.name} ({coin?.symbol.toUpperCase()})
                   </li>
                 </Link>

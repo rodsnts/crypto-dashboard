@@ -7,17 +7,17 @@ interface SelectProps {
   children: React.ReactNode
 }
 
-export function Select({value, name, onChangeAction, children}: SelectProps) {
+export function Select({ value, name, onChangeAction, children }: SelectProps) {
   return (
     <select
-      className="border border-gray-200 p-2 rounded-md focus:outline-none"
+      className=" border bg-ctp-base border-ctp-lavender p-2 rounded-md focus:outline-none"
       name={name}
       value={value}
       onChange={onChangeAction}
     >
       {children}
     </select>
-  ) 
+  )
 }
 
 interface OptionProps {
@@ -25,9 +25,9 @@ interface OptionProps {
   children: string
 }
 
-export function Option({value, children}: OptionProps) {
+export function Option({ value, children }: OptionProps) {
   return (
-    <option value={value}>
+    <option className="text-ctp-text" value={value}>
       {children}
     </option>
   )

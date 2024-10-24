@@ -8,8 +8,8 @@ const PriceChart = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-[400px] bg-gray-200 animate-pulse flex items-center justify-center">
-        <p>Loading chart...</p>
+      <div className="w-[200px] h-[40px] bg-ctp-base animate-pulse flex items-center justify-center">
+        <p className="text-ctp-lavender">Loading chart...</p>
       </div>
     )
   }
@@ -22,10 +22,12 @@ interface PriceChartSectionProps {
 
 function PriceChartSection({ priceData, hasProfit }: PriceChartSectionProps) {
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 sm:p-6">
+    <div className="bg-ctp-crust border-ctp-lavender border-2 rounded-lg p-4 sm:p-6">
       <div className="mb-4">
-        <h2 className="text-xl sm:text-2xl font-bold">Price Chart</h2>
-        <p className="text-gray-600">Bitcoin price over time (1W) </p>
+        <h2 className="text-xl sm:text-2xl text-ctp-text font-bold">
+          Price Chart
+        </h2>
+        <p className="text-ctp-subtext0">Bitcoin price over time (1W) </p>
       </div>
       <div className="relative h-[300px] sm:h-[400px]">
         <PriceChart priceData={priceData} hasProfit={hasProfit} />

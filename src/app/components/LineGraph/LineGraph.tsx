@@ -45,7 +45,7 @@ function LineGraph({ data }: Props) {
         tickLine={false}
         stroke="#cdd6f4"
         dataKey="DATE"
-        hide={true}
+        hide
         axisLine={false}
         tickFormatter={(DATE) => {
           const dateObj = new Date(DATE)
@@ -53,7 +53,7 @@ function LineGraph({ data }: Props) {
         }}
       />
       <YAxis
-        hide={true}
+        hide
         width={40}
         tickLine={false}
         axisLine={false}
@@ -78,7 +78,7 @@ function LineGraph({ data }: Props) {
             const price = payload[0]?.value
 
             return (
-              <div className="rounded-xl bg-white p-4 mt-4 text-textBase shadow-lg dark:bg-foregroundDark dark:text-textBaseDark">
+              <div className="rounded-xl bg-ctp-base p-4 mt-4 text-ctp-text shadow-lg dark:bg-foregroundDark dark:text-textBaseDark">
                 <p>{`${formattedDate}`}</p>
                 <p>{`$ ${Number(price)?.toFixed(2)}`}</p>
               </div>

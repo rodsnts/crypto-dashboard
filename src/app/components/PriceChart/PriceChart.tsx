@@ -29,7 +29,7 @@ function PriceChart({ priceData, hasProfit }: PriceChartProps) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+        margin={{ top: 50, right: 20, bottom: 20, left: 0 }}
         data={formattedData}
       >
         <defs>
@@ -39,13 +39,14 @@ function PriceChart({ priceData, hasProfit }: PriceChartProps) {
               stopColor={hasProfit ? "#40a02b" : "#d20f39"}
               stopOpacity={0.3}
             />
-            <stop offset="95%" stopColor="#fff" stopOpacity={0} />
+            <stop offset="95%" stopColor="#000" stopOpacity={0} />
           </linearGradient>
         </defs>
         <CartesianGrid vertical={false} strokeDasharray="3 0" opacity={0.2} />
         <XAxis
           dataKey="date"
           axisLine={false}
+          tickLine={false}
           tick={{ fontSize: 12 }}
           minTickGap={80}
           tickFormatter={(value) => new Date(value).toLocaleDateString()}
@@ -54,6 +55,7 @@ function PriceChart({ priceData, hasProfit }: PriceChartProps) {
           tickFormatter={(value) => `$${value.toLocaleString()}`}
           axisLine={false}
           tick={{ fontSize: 12 }}
+          tickLine={false}
           domain={["auto", "auto"]}
         />
         <Tooltip
@@ -72,7 +74,7 @@ function PriceChart({ priceData, hasProfit }: PriceChartProps) {
               })
 
               return (
-                <div className="bg-white p-4 shadow-md rounded-md">
+                <div className="rounded-xl bg-ctp-base p-4 mt-4 text-ctp-text shadow-lg dark:bg-foregroundDark dark:text-textBaseDark">
                   <p className="text-sm">{formattedDate}</p>
                   <p className="text-sm">Price: ${Number(price)?.toFixed(2)}</p>
                 </div>

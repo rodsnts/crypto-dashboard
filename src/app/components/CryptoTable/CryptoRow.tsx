@@ -13,8 +13,8 @@ const LineGraph = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-[200px] h-[40px] bg-gray-200 animate-pulse flex items-center justify-center">
-        <p>Loading chart...</p>
+      <div className="w-[200px] h-[40px] bg-ctp-base animate-pulse flex items-center justify-center">
+        <p className="text-ctp-lavender">Loading chart...</p>
       </div>
     )
   }
@@ -42,14 +42,14 @@ function CryptoRow({
   historyData
 }: CryptoRowProps) {
   return (
-    <tr key={crypto} className="hover:bg-gray-50 text-center mouse-pointer">
+    <tr key={crypto} className="hover:bg-ctp-mantle text-center mouse-pointer">
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-900">{index + 1}</div>
+        <div className="text-sm ">{index + 1}</div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
         <Link href={`/coins/${crypto.toLowerCase()}`}>
-          <div className="text-sm inline-block font-medium text-gray-900 hover:text-blue-500 cursor-pointer transition-colors duration-200 ease-in-out">
+          <div className="text-sm inline-block font-medium  hover:text-white cursor-pointer transition-colors duration-200 ease-in-out">
             {crypto?.toUpperCase()}
             <FiExternalLink className="inline-block ml-2" />
           </div>
@@ -57,7 +57,7 @@ function CryptoRow({
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-500">
+        <div className="text-sm">
           {
             CurrencySymbols[
               currency?.toUpperCase() as keyof typeof CurrencySymbols
@@ -68,13 +68,13 @@ function CryptoRow({
       </td>
 
       <td className="relative w-1 px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-900">
+        <div className="text-sm ">
           <LineGraph data={historyData} />
         </div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap text-center">
-        <div className="text-sm text-gray-900">
+        <div className="text-sm ">
           {convertNumber(cryptoData[crypto][`${currency}_market_cap`])}
         </div>
       </td>
