@@ -23,9 +23,6 @@ function LineGraph({ data }: Props) {
     price: priceData[1] // coin price
   }))
 
-  console.log("test", data)
-  console.log("test2", formattedData)
-
   useEffect(() => {
     if (formattedData) {
       const firstPrice = formattedData[0].price

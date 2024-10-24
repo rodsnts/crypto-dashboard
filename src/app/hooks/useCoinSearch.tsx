@@ -25,7 +25,7 @@ export const useCoinSearch = (query: string): UseCoinSearchResult => {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if (query.length >= 3) {
+    if (query.length >= 2) {
       const fetchData = async () => {
         setIsLoading(true)
         setError(null)

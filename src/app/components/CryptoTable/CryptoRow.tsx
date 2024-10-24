@@ -36,7 +36,7 @@ function CryptoRow({
 
       <td className="px-6 py-4 whitespace-nowrap">
         <Link href={`/coins/${crypto.toLowerCase()}`}>
-          <div className="text-sm font-medium text-gray-900 hover:text-blue-500 cursor-pointer transition-colors duration-200 ease-in-out">
+          <div className="text-sm inline-block font-medium text-gray-900 hover:text-blue-500 cursor-pointer transition-colors duration-200 ease-in-out">
             {crypto?.toUpperCase()}
             <FiExternalLink className="inline-block ml-2" />
           </div>

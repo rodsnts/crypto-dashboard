@@ -9,14 +9,10 @@ import { Select, Option } from "../Select/Select"
 
 function Navbar() {
   const [currencyParam, setCurrencyParam] = useState<string | undefined>()
+  const [isMenuOpen, setIsMenuOpen] = useState(false) // State to control mobile menu visibility
 
   const router = useRouter()
   const searchParams = useSearchParams()
-
-  /**
-    @name useEffect
-    @description Sets the currency parameter
-  **/
 
   useEffect(() => {
     const currency = searchParams.get("currency")
@@ -24,12 +20,6 @@ function Navbar() {
       setCurrencyParam(currency)
     }
   }, [searchParams])
-
-  /**
-    @name handleCurrencyChange
-    @param {React.ChangeEvent<HTMLSelectElement>} event
-    @description Handles the currency change
-  **/
 
   const handleCurrencyChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -40,26 +30,69 @@ function Navbar() {
     router.push(`?currency=${newCurrency}`)
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   return (
-    <nav className="flex items-center justify-between flex-wrap p-3 border-b border-ctp-lavender">
-      <ul className="flex space-x-4">
-        <li>
-          <Link className="font-bold" href="/">
-            CryptoDashboard
-          </Link>
-        </li>
-      </ul>
+    <nav className="p-3 border-b border-ctp-lavender">
+      <div className="flex items-center justify-between">
+        {!isMenuOpen && (
+          <div className="flex items-center">
+            <Link className="font-bold text-lg" href="/">
+              CryptoDashboard
+            </Link>
+          </div>
+        )}
 
-      <SearchBar />
+        {/* Hamburger Button for mobile */}
+        <div className="block mr-2 lg:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={
+                  isMenuOpen
+                    ? "M6 18L18 6M6 6l12 12"
+                    : "M4 6h16M4 12h16M4 18h16"
+                }
+              ></path>
+            </svg>
+          </button>
+        </div>
 
-      <Select
-        value={currencyParam || "usd"}
-        onChangeAction={handleCurrencyChange}
-      >
-        <Option value="usd">USD</Option>
-        <Option value="eur">EUR</Option>
-        <Option value="gbp">GBP</Option>
-      </Select>
+        <div
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } w-full lg:flex lg:items-center lg:w-auto flex justify-center items-center`}
+        >
+          <div className="mt-4 lg:mt-0 lg:ml-4">
+            <SearchBar />
+          </div>
+
+          <div className="mt-4 lg:mt-0 lg:ml-4">
+            <Select
+              value={currencyParam || "usd"}
+              onChangeAction={handleCurrencyChange}
+            >
+              <Option value="usd">USD</Option>
+              <Option value="eur">EUR</Option>
+              <Option value="gbp">GBP</Option>
+            </Select>
+          </div>
+        </div>
+      </div>
     </nav>
   )
 }
