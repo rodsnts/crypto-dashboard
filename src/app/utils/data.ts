@@ -37,7 +37,7 @@ export async function getCryptoList(currency: Currency = "usd") {
 
     return cryptoCurrencies
   } catch (error) {
-    return error
+    console.error(error)
   }
 }
 
@@ -48,20 +48,20 @@ export async function getCryptoList(currency: Currency = "usd") {
  @description Fetches the data of a specific cryptocurrency
 **/
 
-export async function getCoinDetails(coin: string, currency: Currency = "usd") {
+export async function getCoinDetails(coin: string) {
   try {
     const data = await fetch(
-      `${API_URL}simple/price?ids=${coin}&vs_currencies=${currency}&${detailParams}`,
+      `${API_URL}coins/${coin}?localization=false&community_data=false&developer_data=false&sparkline=false'`,
       options
     )
 
     const cryptoCurrency = await data.json()
 
+    console.log(cryptoCurrency)
+
     return cryptoCurrency
   } catch (error) {
     console.error(error)
-
-    return error
   }
 }
 
@@ -80,16 +80,13 @@ export async function getCoinHistory(
 ) {
   try {
     const data = await fetch(
-      `${API_URL}/coins/${coin}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`,
+      `${API_URL}/coins/${coin}/market_chart?vs_currency=${currency}&days=${days}`,
       options
     )
 
     const cryptoCurrency = await data.json()
-
     return cryptoCurrency
   } catch (error) {
     console.error(error)
-
-    return error
   }
 }

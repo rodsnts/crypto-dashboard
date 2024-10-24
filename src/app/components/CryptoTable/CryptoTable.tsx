@@ -27,7 +27,7 @@ const columns = [
   "No",
   "Name",
   "Price",
-  "Historical Data",
+  "Price Graph (24h)",
   "Market cap",
   "24h Change"
 ]
@@ -54,7 +54,8 @@ async function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
               {Object.keys(cryptoData).map(async (crypto) => {
                 const mockData = await getCoinHistory(
                   crypto,
-                  currency as Currency
+                  (currency as Currency) || "usd",
+                  1
                 )
 
                 return (
@@ -81,8 +82,8 @@ async function CryptoTable({ currency, cryptoData }: CryptoTableProps) {
                       </div>
                     </td>
 
-                    <td className="px-6 py-4 whitespace-nowrap flex">
-                      <LineGraph width="100%" height="50%" data={mockData} />
+                    <td className="relative w-1 px-6 py-4 whitespace-nowrap">
+                      <LineGraph width="100%" height="100%" data={mockData} />
                     </td>
 
                     <td className="px-6 py-4 whitespace-nowrap text-center">

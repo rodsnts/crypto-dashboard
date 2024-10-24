@@ -37,7 +37,7 @@ function Navbar() {
     const newCurrency = event.target.value
     setCurrencyParam(newCurrency)
 
-    router.push(`/?currency=${newCurrency}`)
+    router.push(`?currency=${newCurrency}`)
   }
 
   return (

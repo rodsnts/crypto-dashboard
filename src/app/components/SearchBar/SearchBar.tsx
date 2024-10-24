@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 
 import { useCoinSearch } from "@/app/hooks/useCoinSearch"
 
@@ -25,14 +26,15 @@ function SearchBar() {
       {suggestions && suggestions.length > 0 && (
         <ul className="absolute z-10 w-full mt-2 border border-gray-300 rounded-md bg-white shadow-lg">
           {suggestions.map((coin) => (
-            <li
+            <Link
               key={coin.id}
-              className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
+              onClick={() => setQuery("")}
+              href={`/coins/${coin?.name}`}
             >
-              <span>
-                {coin.name} ({coin.symbol.toUpperCase()})
-              </span>
-            </li>
+              <li className="p-2 hover:bg-gray-100 cursor-pointer flex items-center">
+                {coin?.name} ({coin?.symbol.toUpperCase()})
+              </li>
+            </Link>
           ))}
         </ul>
       )}
